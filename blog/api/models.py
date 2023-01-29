@@ -19,3 +19,12 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['created', ]
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=128, blank=False, default='')
+    owner = models.ForeignKey('auth.User', related_name='categories', on_delete=models.CASCADE)
+    posts = models.ManyToManyField('Post', related_name='categories', blank=True)
+
+    class Meta:
+        verbose_name_plural = 'categories' # categorys != categories
