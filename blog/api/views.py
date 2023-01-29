@@ -51,6 +51,9 @@ class CategoryList(generics.ListCreateAPIView):
     serializer_class = serializers.CategorySerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, ]
 
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
 
 class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Category.objects.all()
