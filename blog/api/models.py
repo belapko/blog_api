@@ -10,6 +10,9 @@ class Post(models.Model):
     class Meta:
         ordering = ['created', ]
 
+    def __str__(self):
+        return f'{self.pk}. {self.title}'
+
 
 class Comment(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -27,4 +30,7 @@ class Category(models.Model):
     posts = models.ManyToManyField('Post', related_name='categories', blank=True)
 
     class Meta:
-        verbose_name_plural = 'categories' # categorys != categories
+        verbose_name_plural = 'categories'  # categorys != categories
+
+    def __str__(self):
+        return f'{self.pk}. {self.name}'
